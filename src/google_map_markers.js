@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, flushSync } from 'react';
 import PropTypes from 'prop-types';
 
 // utils
@@ -95,6 +95,15 @@ export default class GoogleMapMarkers extends Component {
 
     this.dimensionsCache_ = null;
   }
+  
+  ReactDOM.flushSync(() => {
+  this.setState(
+    state,
+    () =>
+      (state.children || []).length !== prevChildCount &&
+      this._onMouseChangeHandler()
+  );
+});
 
   _getState = () => ({
     children: this.props.dispatcher.getChildren(),
