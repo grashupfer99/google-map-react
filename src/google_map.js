@@ -512,7 +512,7 @@ class GoogleMap extends Component {
     });
   };
   
-  ReactDOM.flushSync(() => {
+  flushSync(() => {
   setTimeout(
     () => {
       // to detect size
@@ -528,7 +528,7 @@ class GoogleMap extends Component {
   );
 });
 
-ReactDOM.flushSync(() => {
+flushSync(() => {
   setTimeout(() => this._initMap(), 0);
 });
 
