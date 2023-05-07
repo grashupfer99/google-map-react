@@ -89,26 +89,6 @@ const _checkMinZoom = (zoom, minZoom) => {
   return minZoom;
 };
 
-ReactDOM.flushSync(() => {
-  setTimeout(
-    () => {
-      // to detect size
-      this._setViewSize();
-      if (
-        this._isCenterDefined(this.props.center || this.props.defaultCenter)
-      ) {
-        this._initMap();
-      }
-    },
-    0,
-    this
-  );
-});
-
-ReactDOM.flushSync(() => {
-  setTimeout(() => this._initMap(), 0);
-});
-
 const isFullScreen = () =>
   document.fullscreen ||
   document.webkitIsFullScreen ||
@@ -531,6 +511,26 @@ class GoogleMap extends Component {
       this.layers_[layerType].setMap(this.map_);
     });
   };
+  
+  ReactDOM.flushSync(() => {
+  setTimeout(
+    () => {
+      // to detect size
+      this._setViewSize();
+      if (
+        this._isCenterDefined(this.props.center || this.props.defaultCenter)
+      ) {
+        this._initMap();
+      }
+    },
+    0,
+    this
+  );
+});
+
+ReactDOM.flushSync(() => {
+  setTimeout(() => this._initMap(), 0);
+});
 
   _renderPortal = () => (
     <GoogleMapMarkers
