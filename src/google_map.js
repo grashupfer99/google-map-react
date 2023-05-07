@@ -89,6 +89,26 @@ const _checkMinZoom = (zoom, minZoom) => {
   return minZoom;
 };
 
+ReactDOM.flushSync(() => {
+  setTimeout(
+    () => {
+      // to detect size
+      this._setViewSize();
+      if (
+        this._isCenterDefined(this.props.center || this.props.defaultCenter)
+      ) {
+        this._initMap();
+      }
+    },
+    0,
+    this
+  );
+});
+
+ReactDOM.flushSync(() => {
+  setTimeout(() => this._initMap(), 0);
+});
+
 const isFullScreen = () =>
   document.fullscreen ||
   document.webkitIsFullScreen ||
@@ -705,9 +725,7 @@ class GoogleMap extends Component {
             this_._onChildMouseMove();
 
             if (this_.markersDispatcher_) {
-              flushSync(() => {
-                this_.markersDispatcher_.emit('kON_CHANGE');
-              })
+              this_.markersDispatcher_.emit('kON_CHANGE');
               if (this_.fireMouseEventOnIdle_) {
                 this_.markersDispatcher_.emit('kON_MOUSE_POSITION_CHANGE');
               }
