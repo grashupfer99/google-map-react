@@ -6,8 +6,19 @@ export default class MarkerDispatcher extends EventEmitter {
     this.gmapInstance = gmapInstance;
   }
 
+  // getChildren() {
+  //  return this.gmapInstance.props.children;
+  // }
   getChildren() {
-    return this.gmapInstance.props.children;
+  if (
+    this.gmapInstance &&
+    this.gmapInstance.props &&
+    this.gmapInstance.props.children
+    )   {
+      return this.gmapInstance.props.children;
+    }
+
+    return undefined;
   }
 
   getMousePosition() {
