@@ -1155,6 +1155,31 @@ ReactDOM.flushSync(() => {
     this.googleMapDom_ = ref;
   };
 
+  if (this.markersDispatcher_) {
+  this.markersDispatcher_.emit('kON_CHANGE');
+}
+
+
+
+if (
+  !shallowEqual(this.props.hoverDistance, prevProps.hoverDistance) &&
+  this.markersDispatcher_
+) {
+  this.markersDispatcher_.emit('kON_MOUSE_POSITION_CHANGE');
+}
+
+
+
+if (this_.markersDispatcher_) {
+  this_.markersDispatcher_.emit('kON_MOUSE_POSITION_CHANGE');
+}
+
+
+
+if (this.markersDispatcher_) {
+  this.markersDispatcher_.emit('kON_CLICK', event);
+}
+
   render() {
     const overlay = this.state.overlay;
     const mapMarkerPrerender = !overlay ? (
