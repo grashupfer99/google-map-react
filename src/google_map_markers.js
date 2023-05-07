@@ -96,14 +96,14 @@ export default class GoogleMapMarkers extends Component {
     this.dimensionsCache_ = null;
   }
   
-  ReactDOM.flushSync(() => {
-  this.setState(
-    state,
-    () =>
-      (state.children || []).length !== prevChildCount &&
-      this._onMouseChangeHandler()
-  );
-});
+  flushSync(() => {
+    this.setState(
+      state,
+      () =>
+        (state.children || []).length !== prevChildCount &&
+        this._onMouseChangeHandler()
+    );
+  });
 
   _getState = () => ({
     children: this.props.dispatcher.getChildren(),
